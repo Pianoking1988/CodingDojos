@@ -2,14 +2,14 @@ package de.heinemann.dojo.discount;
 
 import java.math.BigDecimal;
 
-public class DiscountForBook {
+public class DiscountBook {
 	
 	private Book book;
 	
 	// percentage (100% == 1; 1% == 0.01) to be subtracted from  price 
 	private BigDecimal discount;
 	
-	DiscountForBook(Book book, BigDecimal discount) {
+	DiscountBook(Book book, BigDecimal discount) {
 		this.book = book;
 		this.discount = discount;
 	}
