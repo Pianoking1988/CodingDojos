@@ -12,28 +12,29 @@ public class QuestionGeneratorTest {
 
 	private final Country GERMANY = new Country("Deutschland", "Berlin");
 	
+	private QuestionGenerator questionGenerator = new QuestionGenerator(3);
+
 	@Test
 	public void emptyCountryListShouldReturnEmptyQuestionList() {
 		List<Country> countries = countries();
-		QuestionGenerator questionGenerator = new QuestionGenerator(3);
 		List<Question> questions = questionGenerator.generateQuestions(countries);
 		assertNotNull(questions);
-		assertEquals(0, questions.size());
+		assertEquals("Number of questions", 0, questions.size());
 	}
 	
 	@Test
 	public void oneItemCountryListShouldReturnOneItemQuestionList() {
 		List<Country> countries = countries(GERMANY);
-		QuestionGenerator questionGenerator = new QuestionGenerator(3);
 		List<Question> questions = questionGenerator.generateQuestions(countries);
-		assertEquals(1, questions.size());
+		assertEquals("Number of questions", 1, questions.size());
 		assertQuestion(question(GERMANY, GERMANY), questions.get(0));
 	}
 	
 	private void assertQuestion(Question expected, Question actual) {
 		assertNotNull(actual);
 		assertCountry(expected.getCountry(), actual.getCountry());
-		assertEquals(expected.getAllCountries().size(), actual.getAllCountries().size());
+		assertEquals("Number of allCountries in question", 
+				expected.getAllCountries().size(), actual.getAllCountries().size());
 		for (int i = 0; i < expected.getAllCountries().size(); i++) {
 			assertCountry(expected.getAllCountries().get(0), actual.getAllCountries().get(0));
 		}
@@ -41,8 +42,8 @@ public class QuestionGeneratorTest {
 	
 	private void assertCountry(Country expected, Country actual) {
 		assertNotNull(actual);
-		assertEquals(expected.getName(), actual.getName());
-		assertEquals(expected.getCapitol(), actual.getCapitol());
+		assertEquals("Name of country", expected.getName(), actual.getName());
+		assertEquals("Capital of country", expected.getCapitol(), actual.getCapitol());
 	}
 	
 	private Question question(Country country, Country... allCountries) {
@@ -59,9 +60,9 @@ public class QuestionGeneratorTest {
 	private List<Country> countries(Country... countries) {
 		List<Country> result = new ArrayList<>();
 		for (Country country : countries) {
-			result.add(new Country(country.getName(), country.getCapitol()));
+			result.add(country);
 		}
 		return result;
 	}
-
+	
 }
