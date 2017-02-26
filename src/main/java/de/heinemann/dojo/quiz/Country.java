@@ -3,19 +3,19 @@ package de.heinemann.dojo.quiz;
 public class Country {
 
 	private String name;
-	private String capitol;
+	private String capital;
 
-	public Country(String name, String capitol) {
+	public Country(String name, String capital) {
 		this.name = name;
-		this.capitol = capitol;
+		this.capital = capital;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getCapitol() {
-		return capitol;
+	public String getCapital() {
+		return capital;
 	}
 
 }
