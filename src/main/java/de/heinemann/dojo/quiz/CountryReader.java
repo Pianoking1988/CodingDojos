@@ -12,6 +12,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import de.heinemann.dojo.quiz.models.Country;
 
+/**
+ * Reads a list of countries from a given file.
+ * The expected format for each line is Country#Capital
+ * whereas blanks are allowed for a name.
+ * 
+ * Incorrect lines will be printed into the console.
+ */
 public class CountryReader {
 	
 	private File file;

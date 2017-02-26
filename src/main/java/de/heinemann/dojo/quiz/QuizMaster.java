@@ -6,6 +6,10 @@ import de.heinemann.dojo.quiz.input.InputReader;
 import de.heinemann.dojo.quiz.models.Question;
 import de.heinemann.dojo.quiz.models.Statistic;
 
+/**
+ * Asks the given questions to the user, evaluates the input and prints statistic
+ * about the number of correct & incorrect answers.
+ */
 public class QuizMaster {
 
 	private int numberOfQuestions;
