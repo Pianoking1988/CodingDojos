@@ -1,4 +1,4 @@
-package de.heinemann.dojo.quiz;
+package de.heinemann.dojo.quiz.random;
 
 import java.util.List;
 

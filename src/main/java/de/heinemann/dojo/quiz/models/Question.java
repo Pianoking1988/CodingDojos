@@ -1,4 +1,4 @@
-package de.heinemann.dojo.quiz;
+package de.heinemann.dojo.quiz.models;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,6 +2,10 @@ package de.heinemann.dojo.quiz;
 
 import java.util.List;
 
+import de.heinemann.dojo.quiz.input.InputReader;
+import de.heinemann.dojo.quiz.models.Question;
+import de.heinemann.dojo.quiz.models.Statistic;
+
 public class QuizMaster {
 
 	private int numberOfQuestions;

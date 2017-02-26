@@ -1,4 +1,4 @@
-package de.heinemann.dojo.quiz;
+package de.heinemann.dojo.quiz.models;
 
 /**
  * Statistic about the number of correct and

@@ -3,6 +3,9 @@ package de.heinemann.dojo.quiz;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.heinemann.dojo.quiz.models.Country;
+import de.heinemann.dojo.quiz.models.Question;
+
 /**
  * Class containing objects for testing and methods for building test objects.
  * 

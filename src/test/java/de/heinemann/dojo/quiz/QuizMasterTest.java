@@ -21,6 +21,9 @@ import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Matchers;
 
+import de.heinemann.dojo.quiz.input.InputReader;
+import de.heinemann.dojo.quiz.models.Question;
+
 public class QuizMasterTest {
 
 	private final Question QUESTION = question(GERMANY, FRANCE, ITALY);
@@ -190,7 +193,41 @@ public class QuizMasterTest {
 	}
 
 	@Test
-	public void askFourQuestions() {
+	public void askQuestionsWithOneItemQuestionList() {
+		init("a");
+		
+		quizMaster.askQuestions(QUESTIONS.subList(0, 1));
+		
+		assertSystemOut("So lasset das Spiel beginnen ...");
+		verify(out, times(1)).println(Matchers.startsWith("Wie lautet die Hauptstadt von"));		
+		verify(out, times(1)).println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme");
+	}
+
+	@Test
+	public void askQuestionsWithTwoItemQuestionList() {
+		init("a", "b");
+		
+		quizMaster.askQuestions(QUESTIONS.subList(0, 2));
+		
+		assertSystemOut("So lasset das Spiel beginnen ...");
+		verify(out, times(2)).println(Matchers.startsWith("Wie lautet die Hauptstadt von"));		
+		verify(out, times(1)).println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme");
+	}
+
+	@Test
+	public void askQuestionsWithThreeItemQuestionList() {
+		init("a", "b", "c");
+		
+		quizMaster.askQuestions(QUESTIONS.subList(0, 3));
+		
+		assertSystemOut("So lasset das Spiel beginnen ...");
+		verify(out, times(3)).println(Matchers.startsWith("Wie lautet die Hauptstadt von"));		
+		verify(out, times(1)).println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme");
+	}
+
+
+	@Test
+	public void askQuestionsWithFourItemQuestionList() {
 		init("a", "b", "c");
 		
 		quizMaster.askQuestions(QUESTIONS);
@@ -200,7 +237,6 @@ public class QuizMasterTest {
 		verify(out, times(1)).println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme");
 	}
 
-	
 	private void assertInputReader() {
 		inOrder.verify(inputReader, times(1)).nextLine();
 	}

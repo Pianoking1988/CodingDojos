@@ -17,6 +17,10 @@ import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
 
+import de.heinemann.dojo.quiz.models.Country;
+import de.heinemann.dojo.quiz.models.Question;
+import de.heinemann.dojo.quiz.random.Shuffler;
+
 public class QuestionGeneratorTest {
 	
 	private Shuffler shuffler = Mockito.mock(Shuffler.class);

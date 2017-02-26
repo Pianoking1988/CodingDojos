@@ -3,6 +3,10 @@ package de.heinemann.dojo.quiz;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.heinemann.dojo.quiz.models.Country;
+import de.heinemann.dojo.quiz.models.Question;
+import de.heinemann.dojo.quiz.random.Shuffler;
+
 /**
  * Creates a shuffled list of questions based on the given shuffler.
  * The number of possible answers of each question can be specified
