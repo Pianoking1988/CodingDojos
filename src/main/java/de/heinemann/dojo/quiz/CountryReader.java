@@ -25,9 +25,9 @@ public class CountryReader {
 	public List<Country> readCountries() {
 		if (!file.exists()) {
 			System.out.println("Leider konnte die Liste der Länder und Hauptstädte nicht gefunden werden.");
-			String string = "Bitte stelle sicher, dass sich die Datei " + file.getName()
-					+ " im selben Ordner wie die .jar Datei befindet.";
-			System.out.println(string);
+			System.out.println("Bitte stelle sicher, dass sich die Datei " + file.getName()
+					+ " im selben Ordner wie die .jar Datei befindet.");
+			System.out.println("");
 			return countries;
 		}
 
@@ -35,6 +35,7 @@ public class CountryReader {
 		
 		if (countries.size() + incorrectLines.size() == 0) {
 			System.out.println("Deine Eingabedatei ist leider leer.");
+			System.out.println("");
 		} else {
 			printIncorrectLines();
 			printCorrectLineInformation();
@@ -57,7 +58,7 @@ public class CountryReader {
 
 	private List<String> readLines() {
 		try {
-			return FileUtils.readLines(file, "UTF-8");
+			return FileUtils.readLines(file, "Cp1252");
 		} catch (Exception exception) {
 			return new ArrayList<>();
 		}
@@ -78,16 +79,20 @@ public class CountryReader {
 	private void printIncorrectLines() {
 		if (!incorrectLines.isEmpty()) {
 			System.out.println(incorrectLines.size() + " Zeilen konnten in der Eingabedatei nicht gelesen werden:");
+			System.out.println("");
 			for (int lineNumber : new TreeSet<Integer>(incorrectLines.keySet())) {
 				System.out.println("Zeile " + lineNumber + ": " + incorrectLines.get(lineNumber));
 			}
+			System.out.println("");
 			System.out.println("Diese Länder werden nun nicht berücksichtigt für dein Spiel.");
 			System.out.println("Korrigiere die Zeilen in der Eingabedatei um dies zu ändern.");
+			System.out.println("");
 		}		
 	}
 
 	private void printCorrectLineInformation() {
 		System.out.println("Für dein Spiel werden nun " + countries.size() + " Länder aus der Datei berücksichtigt.");		
+		System.out.println("");
 	}
 
 }

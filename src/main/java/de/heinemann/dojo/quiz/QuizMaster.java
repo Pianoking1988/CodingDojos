@@ -20,6 +20,7 @@ public class QuizMaster {
 
 	public void askQuestions(List<Question> questions) {
 		System.out.println("So lasset das Spiel beginnen ...");
+		System.out.println("");
 		for (int i = 0; i < Math.min(numberOfQuestions, questions.size()); i++) {
 			askQuestion(questions.get(i));
 		}

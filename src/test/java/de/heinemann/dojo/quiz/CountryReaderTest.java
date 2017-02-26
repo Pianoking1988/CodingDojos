@@ -45,7 +45,8 @@ public class CountryReaderTest {
 		
 		assertCountries(expected, actual);
 		assertSystemOut("Leider konnte die Liste der Länder und Hauptstädte nicht gefunden werden.",
-				"Bitte stelle sicher, dass sich die Datei notExisting.txt im selben Ordner wie die .jar Datei befindet.");
+				"Bitte stelle sicher, dass sich die Datei notExisting.txt im selben Ordner wie die .jar Datei befindet.",
+				"");
 		inOrder.verifyNoMoreInteractions();
 	}
 	
@@ -58,7 +59,8 @@ public class CountryReaderTest {
 		List<Country> actual = countryReader.readCountries();
 		
 		assertCountries(expected, actual);
-		assertSystemOut("Deine Eingabedatei ist leider leer.");
+		assertSystemOut("Deine Eingabedatei ist leider leer.",
+				"");
 		inOrder.verifyNoMoreInteractions();
 	}
 	
@@ -71,7 +73,8 @@ public class CountryReaderTest {
 		List<Country> actual = countryReader.readCountries();
 		
 		assertCountries(expected, actual);
-		assertSystemOut("Für dein Spiel werden nun 4 Länder aus der Datei berücksichtigt.");
+		assertSystemOut("Für dein Spiel werden nun 4 Länder aus der Datei berücksichtigt.",
+				"");
 		inOrder.verifyNoMoreInteractions();
 	}
 		
@@ -85,12 +88,16 @@ public class CountryReaderTest {
 		
 		assertCountries(expected, actual);
 		assertSystemOut("3 Zeilen konnten in der Eingabedatei nicht gelesen werden:",
+				"",
 				"Zeile 2: Frankrei#ch#Paris",
 				"Zeile 4: ",
 				"Zeile 5: Spanien#",
+				"",
 				"Diese Länder werden nun nicht berücksichtigt für dein Spiel.",
 				"Korrigiere die Zeilen in der Eingabedatei um dies zu ändern.",
-				"Für dein Spiel werden nun 2 Länder aus der Datei berücksichtigt.");
+				"",
+				"Für dein Spiel werden nun 2 Länder aus der Datei berücksichtigt.",
+				"");
 		
 		inOrder.verifyNoMoreInteractions();
 	}
@@ -105,12 +112,16 @@ public class CountryReaderTest {
 		
 		assertCountries(expected, actual);
 		assertSystemOut("3 Zeilen konnten in der Eingabedatei nicht gelesen werden:",
+				"",
 				"Zeile 1: Frankrei#ch#Paris",
 				"Zeile 2: ",
 				"Zeile 3: Spanien#",
+				"",
 				"Diese Länder werden nun nicht berücksichtigt für dein Spiel.",
 				"Korrigiere die Zeilen in der Eingabedatei um dies zu ändern.",
-				"Für dein Spiel werden nun 0 Länder aus der Datei berücksichtigt.");
+				"",
+				"Für dein Spiel werden nun 0 Länder aus der Datei berücksichtigt.",
+				"");
 		
 		inOrder.verifyNoMoreInteractions();
 	}

@@ -232,7 +232,7 @@ public class QuizMasterTest {
 		
 		quizMaster.askQuestions(QUESTIONS);
 		
-		assertSystemOut("So lasset das Spiel beginnen ...");
+		assertSystemOut("So lasset das Spiel beginnen ...", "");
 		verify(out, times(3)).println(Matchers.startsWith("Wie lautet die Hauptstadt von"));		
 		verify(out, times(1)).println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme");
 	}
