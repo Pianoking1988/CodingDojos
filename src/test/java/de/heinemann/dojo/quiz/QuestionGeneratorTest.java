@@ -6,6 +6,7 @@ import static de.heinemann.dojo.quiz.TestUtils.ITALY;
 import static de.heinemann.dojo.quiz.TestUtils.SPAIN;
 import static de.heinemann.dojo.quiz.TestUtils.countries;
 import static de.heinemann.dojo.quiz.TestUtils.question;
+import static de.heinemann.dojo.quiz.models.QuestionType.ASK_FOR_CAPITAL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.times;
@@ -42,7 +43,7 @@ public class QuestionGeneratorTest {
 		List<Question> questions = questionGenerator.generateQuestions(countries);
 
 		assertEquals("Number of questions", 1, questions.size());
-		assertQuestion(question(GERMANY), questions.get(0));
+		assertQuestion(question(ASK_FOR_CAPITAL, GERMANY), questions.get(0));
 		verify(shuffler, times(3)).shuffle(Matchers.anyList());
 	}
 
@@ -52,8 +53,8 @@ public class QuestionGeneratorTest {
 		List<Question> questions = questionGenerator.generateQuestions(countries);
 
 		assertEquals("Number of questions", 2, questions.size());
-		assertQuestion(question(GERMANY, FRANCE), questions.get(0));
-		assertQuestion(question(FRANCE, GERMANY), questions.get(1));
+		assertQuestion(question(ASK_FOR_CAPITAL, GERMANY, FRANCE), questions.get(0));
+		assertQuestion(question(ASK_FOR_CAPITAL, FRANCE, GERMANY), questions.get(1));
 		verify(shuffler, times(5)).shuffle(Matchers.anyList());
 	}
 
@@ -63,9 +64,9 @@ public class QuestionGeneratorTest {
 		List<Question> questions = questionGenerator.generateQuestions(countries);
 
 		assertEquals("Number of questions", 3, questions.size());
-		assertQuestion(question(GERMANY, FRANCE, ITALY), questions.get(0));
-		assertQuestion(question(FRANCE, GERMANY, ITALY), questions.get(1));
-		assertQuestion(question(ITALY, GERMANY, FRANCE), questions.get(2));
+		assertQuestion(question(ASK_FOR_CAPITAL, GERMANY, FRANCE, ITALY), questions.get(0));
+		assertQuestion(question(ASK_FOR_CAPITAL, FRANCE, GERMANY, ITALY), questions.get(1));
+		assertQuestion(question(ASK_FOR_CAPITAL, ITALY, GERMANY, FRANCE), questions.get(2));
 		verify(shuffler, times(7)).shuffle(Matchers.anyList());
 	}
 
@@ -75,10 +76,10 @@ public class QuestionGeneratorTest {
 		List<Question> questions = questionGenerator.generateQuestions(countries);
 
 		assertEquals("Number of questions", 4, questions.size());
-		assertQuestion(question(GERMANY, FRANCE, ITALY), questions.get(0));
-		assertQuestion(question(FRANCE, GERMANY, ITALY), questions.get(1));
-		assertQuestion(question(ITALY, GERMANY, FRANCE), questions.get(2));
-		assertQuestion(question(SPAIN, GERMANY, FRANCE), questions.get(3));
+		assertQuestion(question(ASK_FOR_CAPITAL, GERMANY, FRANCE, ITALY), questions.get(0));
+		assertQuestion(question(ASK_FOR_CAPITAL, FRANCE, GERMANY, ITALY), questions.get(1));
+		assertQuestion(question(ASK_FOR_CAPITAL, ITALY, GERMANY, FRANCE), questions.get(2));
+		assertQuestion(question(ASK_FOR_CAPITAL, SPAIN, GERMANY, FRANCE), questions.get(3));
 		verify(shuffler, times(9)).shuffle(Matchers.anyList());
 	}
 

@@ -10,7 +10,7 @@ Write a quiz that asks the user for the capital of a given country.
 * Each question has 10 random distinct possible answers
 * After each question, the application has to display the user if his answer has been correct or not
 * If an answer is not correct, the correct answer has to be displayed as well
-* A statistic of correct and incorrect answers of the user has to be displayed after each question.  
+* A statistic of correct and incorrect answers of the user has to be displayed after each question
 
 ## Customer data
 
