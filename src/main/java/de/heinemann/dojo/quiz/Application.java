@@ -8,7 +8,7 @@ import de.heinemann.dojo.quiz.models.Country;
 import de.heinemann.dojo.quiz.models.Question;
 import de.heinemann.dojo.quiz.random.ShufflerImpl;
 
-public class App {
+public class Application {
 
 	public static void main(String[] args) {
 		CountryReader countryReader = new CountryReader(new File("Länder und Hauptstädte.txt"));
