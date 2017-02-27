@@ -67,4 +67,8 @@ public class Question {
 		this.questionType = questionType;
 	}
 
+	public QuestionType getQuestionType() {
+		return questionType;
+	}
+
 }
