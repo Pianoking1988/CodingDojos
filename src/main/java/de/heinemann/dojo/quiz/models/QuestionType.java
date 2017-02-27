@@ -2,15 +2,17 @@ package de.heinemann.dojo.quiz.models;
 
 public enum QuestionType {
 
-	ASK_FOR_CAPITAL (1, "Frage nach der Hauptstadt für ein Land"),
-	ASK_FOR_NAME (2, "Frage nach dem Land für eine Hauptstadt");
+	ASK_FOR_CAPITAL (1, "Frage nach der Hauptstadt für ein Land", "Hauptstadt"),
+	ASK_FOR_NAME (2, "Frage nach dem Land für eine Hauptstadt", "Land");
 	
 	private int value;
 	private String description;
+	private String keyword;
 	
-	private QuestionType(int value, String description) {
+	private QuestionType(int value, String description, String keyword) {
 		this.value = value;
 		this.description = description;
+		this.keyword = keyword;
 	}
 
 	public int getValue() {
@@ -19,6 +21,10 @@ public enum QuestionType {
 
 	public String getDescription() {
 		return description;
+	}
+	
+	public String getKeyword() {
+		return keyword;
 	}
 	
 }
