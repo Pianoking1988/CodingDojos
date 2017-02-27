@@ -79,19 +79,20 @@ public class CountryReaderTest {
 	}
 		
 	@Test
-	public void readingTwoCorrectCountriesAndThreeIncorrectCountriesFromFile() {
-		init("2 correct countries and 3 incorrect countries.txt");
+	public void readingTwoCorrectCountriesAndFourIncorrectCountriesFromFile() {
+		init("2 correct countries and 4 incorrect countries.txt");
 		
 		List<Country> expected = countries(GERMANY, ITALY);
 		
 		List<Country> actual = countryReader.readCountries();
 		
 		assertCountries(expected, actual);
-		assertSystemOut("3 Zeilen konnten in der Eingabedatei nicht gelesen werden:",
+		assertSystemOut("4 Zeilen konnten in der Eingabedatei nicht gelesen werden:",
 				"",
 				"Zeile 2: Frankrei#ch#Paris",
 				"Zeile 4: ",
 				"Zeile 5: Spanien#",
+				"Zeile 6: #Wien",
 				"",
 				"Diese Länder werden nun nicht berücksichtigt für dein Spiel.",
 				"Korrigiere die Zeilen in der Eingabedatei um dies zu ändern.",

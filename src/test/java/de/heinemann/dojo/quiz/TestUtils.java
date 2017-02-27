@@ -3,6 +3,8 @@ package de.heinemann.dojo.quiz;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import de.heinemann.dojo.quiz.models.Country;
 import de.heinemann.dojo.quiz.models.Question;
 
@@ -15,6 +17,8 @@ import de.heinemann.dojo.quiz.models.Question;
  * and the test compares GERMANY.name equals country.name which will mask the error. 
  */
 public class TestUtils {
+
+	public static final String SEPARATOR = StringUtils.repeat("*", 40);
 
 	public final static Country GERMANY = new Country("Deutschland", "Berlin");
 	public final static Country FRANCE = new Country("Frankreich", "Paris");

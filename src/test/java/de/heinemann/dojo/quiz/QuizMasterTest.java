@@ -3,6 +3,7 @@ package de.heinemann.dojo.quiz;
 import static de.heinemann.dojo.quiz.TestUtils.FRANCE;
 import static de.heinemann.dojo.quiz.TestUtils.GERMANY;
 import static de.heinemann.dojo.quiz.TestUtils.ITALY;
+import static de.heinemann.dojo.quiz.TestUtils.SEPARATOR;
 import static de.heinemann.dojo.quiz.TestUtils.SPAIN;
 import static de.heinemann.dojo.quiz.TestUtils.question;
 import static de.heinemann.dojo.quiz.TestUtils.questions;
@@ -10,6 +11,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -52,189 +54,113 @@ public class QuizMasterTest {
 		quizMaster = new QuizMaster(3, inputReader);
 	}
 	
-	@Test
-	public void askSingleQuestionAndAnswerCorrectly() {
-		init("a");
+	private void askAndAssertSingleQuestionForCapitalAndAnswerCorrectly(int reAsks, String input, String... inputs) {
+		init(input, inputs);
 
 		assertTrue("askQuestion should return true", quizMaster.askQuestion(QUESTION));
 
-		assertSystemOut("Wie lautet die Hauptstadt von Deutschland?",
+		assertSystemOut(SEPARATOR, "", "Wie lautet die Hauptstadt von Deutschland?",
 				"a) Berlin",
 				"b) Paris",
-				"c) Rom");
+				"c) Rom",
+				"");
 		assertInputReader();
-		assertSystemOut("Deine Antwort ist richtig.",
-				"Von 1 Frage hast du 1 Frage richtig und 0 Fragen falsch beantwortet.");
+		
+		if (reAsks > 0) {
+			for (int i = 0; i < reAsks; i++) {
+				assertSystemOut("Deine Antwort habe ich nicht verstanden. Bitte antworte erneut.");
+				assertInputReader();
+			} 
+		} else {
+			inOrder.verify(out, never()).println("Deine Antwort habe ich nicht verstanden. Bitte antworte erneut.");
+			inOrder.verify(inputReader, never()).nextLine();
+		}
+		
+		assertSystemOut("", "Deine Antwort ist richtig.",
+				"Von 1 Frage hast du 1 Frage richtig und 0 Fragen falsch beantwortet.", "");
 		inOrder.verifyNoMoreInteractions();
 	}
-
+	
 	@Test
 	public void askSingleQuestionAndAnswerIncorrectly() {
 		init("b");
 
 		assertFalse("askQuestion should return false", quizMaster.askQuestion(QUESTION));
 		
-		assertSystemOut("Wie lautet die Hauptstadt von Deutschland?",
+		assertSystemOut(SEPARATOR, "", "Wie lautet die Hauptstadt von Deutschland?",
 				"a) Berlin",
 				"b) Paris",
-				"c) Rom");
+				"c) Rom",
+				"");
 		assertInputReader();
-		assertSystemOut("Deine Antwort ist falsch. Die richtige Antwort wäre Berlin gewesen.",
-				"Von 1 Frage hast du 0 Fragen richtig und 1 Frage falsch beantwortet.");
+		assertSystemOut("", "Deine Antwort ist falsch. Die richtige Antwort wäre Berlin gewesen.",
+				"Von 1 Frage hast du 0 Fragen richtig und 1 Frage falsch beantwortet.", "");
 		inOrder.verifyNoMoreInteractions();
 	}
 
 	@Test
+	public void askSingleQuestionAndAnswerCorrectly() {
+		askAndAssertSingleQuestionForCapitalAndAnswerCorrectly(0, "a");
+	}
+	
+	@Test
 	public void askSingleQuestionAndAnswerCorrectlyButWithLeadingAndTrailingSpaces() {
-		init(" a ");
-
-		assertTrue("askQuestion should return true", quizMaster.askQuestion(QUESTION));
-
-		assertSystemOut("Wie lautet die Hauptstadt von Deutschland?",
-				"a) Berlin",
-				"b) Paris",
-				"c) Rom");
-		assertInputReader();
-		assertSystemOut("Deine Antwort ist richtig.",
-				"Von 1 Frage hast du 1 Frage richtig und 0 Fragen falsch beantwortet.");
-		inOrder.verifyNoMoreInteractions();
+		askAndAssertSingleQuestionForCapitalAndAnswerCorrectly(0, " a ");
 	}
 
 	@Test
 	public void askSingleQuestionAndWithEmptyStringAndAnswerCorrectlyAfterwards() {
-		init("", "a");
-
-		assertTrue("askQuestion should return true", quizMaster.askQuestion(QUESTION));
-		
-		assertSystemOut("Wie lautet die Hauptstadt von Deutschland?",
-				"a) Berlin",
-				"b) Paris",
-				"c) Rom");
-		assertInputReader();
-		assertSystemOut("Deine Antwort habe ich nicht verstanden. Bitte antworte erneut.");
-		assertInputReader();
-		assertSystemOut("Deine Antwort ist richtig.",
-				"Von 1 Frage hast du 1 Frage richtig und 0 Fragen falsch beantwortet.");
-		inOrder.verifyNoMoreInteractions();
+		askAndAssertSingleQuestionForCapitalAndAnswerCorrectly(1, "", "a");
 	}
 
 	@Test
 	public void askSingleQuestionAndAnswerWithNumberAndAnswerCorrectlyAfterwards() {
-		init("9", "a");
-
-		assertTrue("askQuestion should return true", quizMaster.askQuestion(QUESTION));
-		
-		assertSystemOut("Wie lautet die Hauptstadt von Deutschland?",
-				"a) Berlin",
-				"b) Paris",
-				"c) Rom");
-		assertInputReader();
-		assertSystemOut("Deine Antwort habe ich nicht verstanden. Bitte antworte erneut.");
-		assertInputReader();
-		assertSystemOut("Deine Antwort ist richtig.",
-				"Von 1 Frage hast du 1 Frage richtig und 0 Fragen falsch beantwortet.");
-		inOrder.verifyNoMoreInteractions();
+		askAndAssertSingleQuestionForCapitalAndAnswerCorrectly(1, "9", "a");
 	}
 
 	@Test
 	public void askSingleQuestionAndAnswerWithIllegalLetterAndAnswerCorrectlyAfterwards() {
-		init("d", "a");
-
-		assertTrue("askQuestion should return true", quizMaster.askQuestion(QUESTION));
-		
-		assertSystemOut("Wie lautet die Hauptstadt von Deutschland?",
-				"a) Berlin",
-				"b) Paris",
-				"c) Rom");
-		assertInputReader();
-		assertSystemOut("Deine Antwort habe ich nicht verstanden. Bitte antworte erneut.");
-		assertInputReader();
-		assertSystemOut("Deine Antwort ist richtig.",
-				"Von 1 Frage hast du 1 Frage richtig und 0 Fragen falsch beantwortet.");
-		inOrder.verifyNoMoreInteractions();
+		askAndAssertSingleQuestionForCapitalAndAnswerCorrectly(1, "d", "a");
 	}
 
 	@Test
 	public void askSingleQuestionAndAnswerNotWithSingleLetterAndAnswerCorrectlyAfterwards() {
-		init("ab", "a");
-
-		assertTrue("askQuestion should return true", quizMaster.askQuestion(QUESTION));
-		
-		assertSystemOut("Wie lautet die Hauptstadt von Deutschland?",
-				"a) Berlin",
-				"b) Paris",
-				"c) Rom");
-		assertInputReader();
-		assertSystemOut("Deine Antwort habe ich nicht verstanden. Bitte antworte erneut.");
-		assertInputReader();
-		assertSystemOut("Deine Antwort ist richtig.",
-				"Von 1 Frage hast du 1 Frage richtig und 0 Fragen falsch beantwortet.");
-		inOrder.verifyNoMoreInteractions();
+		askAndAssertSingleQuestionForCapitalAndAnswerCorrectly(1, "ab", "a");
 	}
 
 	@Test
 	public void askSingleQuestionAndAnswerTwoTimesWithNumberAndAnswerCorrectlyAfterwards() {
-		init("9", "1", "a");
-
-		assertTrue("askQuestion should return true", quizMaster.askQuestion(QUESTION));
+		askAndAssertSingleQuestionForCapitalAndAnswerCorrectly(2, "9", "1", "a");
+	}
+	
+	private void askAndAssertQuestions(List<Question> questions, int numberOfQuestions, String input, String... inputs) {
+		init(input, inputs);
 		
-		assertSystemOut("Wie lautet die Hauptstadt von Deutschland?",
-				"a) Berlin",
-				"b) Paris",
-				"c) Rom");
-		assertInputReader();
-		assertSystemOut("Deine Antwort habe ich nicht verstanden. Bitte antworte erneut.");
-		assertInputReader();
-		assertSystemOut("Deine Antwort habe ich nicht verstanden. Bitte antworte erneut.");
-		assertInputReader();
-		assertSystemOut("Deine Antwort ist richtig.",
-				"Von 1 Frage hast du 1 Frage richtig und 0 Fragen falsch beantwortet.");
-		inOrder.verifyNoMoreInteractions();
+		quizMaster.askQuestions(questions);
+		
+		assertSystemOut("So lasset das Spiel beginnen ...");
+		verify(out, times(numberOfQuestions)).println(Matchers.startsWith("Wie lautet die Hauptstadt von"));		
+		verify(out, times(1)).println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme.");		
 	}
 
 	@Test
 	public void askQuestionsWithOneItemQuestionList() {
-		init("a");
-		
-		quizMaster.askQuestions(QUESTIONS.subList(0, 1));
-		
-		assertSystemOut("So lasset das Spiel beginnen ...");
-		verify(out, times(1)).println(Matchers.startsWith("Wie lautet die Hauptstadt von"));		
-		verify(out, times(1)).println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme");
+		askAndAssertQuestions(QUESTIONS.subList(0, 1), 1, "a");
 	}
 
 	@Test
 	public void askQuestionsWithTwoItemQuestionList() {
-		init("a", "b");
-		
-		quizMaster.askQuestions(QUESTIONS.subList(0, 2));
-		
-		assertSystemOut("So lasset das Spiel beginnen ...");
-		verify(out, times(2)).println(Matchers.startsWith("Wie lautet die Hauptstadt von"));		
-		verify(out, times(1)).println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme");
+		askAndAssertQuestions(QUESTIONS.subList(0, 2), 2, "a", "b");
 	}
 
 	@Test
 	public void askQuestionsWithThreeItemQuestionList() {
-		init("a", "b", "c");
-		
-		quizMaster.askQuestions(QUESTIONS.subList(0, 3));
-		
-		assertSystemOut("So lasset das Spiel beginnen ...");
-		verify(out, times(3)).println(Matchers.startsWith("Wie lautet die Hauptstadt von"));		
-		verify(out, times(1)).println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme");
+		askAndAssertQuestions(QUESTIONS.subList(0, 3), 3, "a", "b", "c");
 	}
-
 
 	@Test
 	public void askQuestionsWithFourItemQuestionList() {
-		init("a", "b", "c");
-		
-		quizMaster.askQuestions(QUESTIONS);
-		
-		assertSystemOut("So lasset das Spiel beginnen ...", "");
-		verify(out, times(3)).println(Matchers.startsWith("Wie lautet die Hauptstadt von"));		
-		verify(out, times(1)).println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme");
+		askAndAssertQuestions(QUESTIONS, 3, "a", "b", "c");
 	}
 
 	private void assertInputReader() {
