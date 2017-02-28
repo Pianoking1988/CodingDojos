@@ -4,7 +4,7 @@ Write a quiz that asks the user for the capital of a given country.
 
 ## Requirements
 
-* The application reads the countries & countries from a given text file
+* The application reads the countries & capitals from a given text file
 * The user has to answer 100 distinct capital questions
 * The order of the questions has to be random
 * Each question has 10 random distinct possible answers

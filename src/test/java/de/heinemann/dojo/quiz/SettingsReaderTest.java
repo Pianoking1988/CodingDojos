@@ -23,15 +23,13 @@ import de.heinemann.dojo.quiz.models.QuestionType;
 
 public class SettingsReaderTest {
 
-	private final int NUMBER_OF_TOTAL_QUESTIONS = 4;
-	
 	private SettingsReader settingsReader;
 	
 	private PrintStream out;
 	private InputReader inputReader;
 	private InOrder inOrder; 
 		
-	private void init(String input, String... inputs) {
+	private void init(int numberOfTotalQuestions, String input, String... inputs) {
 		out = mock(PrintStream.class);
 		System.setOut(out);
 		
@@ -40,7 +38,7 @@ public class SettingsReaderTest {
 		
 		inOrder = inOrder(out, inputReader);
 		
-		settingsReader = new SettingsReader(NUMBER_OF_TOTAL_QUESTIONS, inputReader);
+		settingsReader = new SettingsReader(numberOfTotalQuestions, inputReader);
 	}
 		
 	/*
@@ -48,10 +46,10 @@ public class SettingsReaderTest {
 	 ******************************************/
 
 	private void readAndAssertNumberOfQuestions(int expected, int reAsks, String input, String...inputs) {
-		init(input, inputs);
+		init(4, input, inputs);
 		
 		final String REASK_TEXT = "Deine Antwort habe ich nicht verstanden"
-				+ ", da ich eine Zahl zwischen 1 und " + NUMBER_OF_TOTAL_QUESTIONS + " benötige."
+				+ ", da ich eine Zahl zwischen 1 und 4 benötige."
 				+ " Bitte antworte erneut.";
 		
 		int actual = settingsReader.readNumberOfQuestions();
@@ -108,17 +106,18 @@ public class SettingsReaderTest {
 	 * Tests for readNumberOfAnswers
 	 ******************************************/
 
-	private void readAndAssertNumberOfAnswers(int expected, int reAsks, String input, String...inputs) {
-		init(input, inputs);
+	private void readAndAssertNumberOfAnswers(int numberOfTotalQuestions, int maxUserInput, int expected, int reAsks, String input, String...inputs) {
+		init(numberOfTotalQuestions, input, inputs);
 		
 		final String REASK_TEXT = "Deine Antwort habe ich nicht verstanden"
-				+ ", da ich eine Zahl zwischen 2 und " + NUMBER_OF_TOTAL_QUESTIONS + " benötige."
+				+ ", da ich eine Zahl zwischen 2 und " + maxUserInput + " benötige."
 				+ " Bitte antworte erneut.";
 		
 		int actual = settingsReader.readNumberOfAnswers();
 		
 		assertEquals("return value", expected, actual);
-		assertSystemOut("Das Quiz kennt insgesamt 4 Fragen. Wieviele Antwortmöglichkeiten soll es geben?");
+		assertSystemOut("Das Quiz kennt insgesamt " + numberOfTotalQuestions + " Fragen. Wieviele Antwortmöglichkeiten soll es geben?"
+				+ " Wähle zwischen 2 und " + maxUserInput + ".");
 		assertInputReader();
 		
 		if (reAsks > 0) {
@@ -137,32 +136,37 @@ public class SettingsReaderTest {
 	
 	@Test
 	public void readNumberOfAnswersWithCorrectInput() {
-		readAndAssertNumberOfAnswers(2, 0, "2");
+		readAndAssertNumberOfAnswers(4, 4, 2, 0, "2");
 	}
 
 	@Test
 	public void readNumberOfAnswersWithCorrectInputButWithLeadingAndTrailingSpaces() {
-		readAndAssertNumberOfAnswers(3, 0, " 3 ");
+		readAndAssertNumberOfAnswers(4, 4, 3, 0, " 3 ");
 	}
 
 	@Test
 	public void readNumberOfAnswersWithTooLowNumberAndAnswerCorrectlyAfterwards() {
-		readAndAssertNumberOfAnswers(2, 1, " 1 ", "2");
+		readAndAssertNumberOfAnswers(4, 4, 2, 1, " 1 ", "2");
 	}
 
 	@Test
 	public void readNumberOfAnswersWithTooHighNumberTwiceAndAnswerCorrectlyAfterwards() {
-		readAndAssertNumberOfAnswers(4, 2, "5", "6", "4");
+		readAndAssertNumberOfAnswers(4, 4, 4, 2, "5", "6", "4");
 	}
 
 	@Test
 	public void readNumberOfAnswersWithEmptyStringAndAnswerCorrectlyAfterwards() {
-		readAndAssertNumberOfAnswers(2, 1, "", "2");
+		readAndAssertNumberOfAnswers(4, 4, 2, 1, "", "2");
 	}
 
 	@Test
 	public void readNumberOfAnswersWithLetterAndAnswerCorrectlyAfterwards() {
-		readAndAssertNumberOfAnswers(4, 1, "a", "4");
+		readAndAssertNumberOfAnswers(4, 4, 4, 1, "a", "4");
+	}
+	
+	@Test
+	public void readNumberOfAnswersWithNumberGreaterTwentyAnswerCorrectlyAfterwards() {
+		readAndAssertNumberOfAnswers(21, 20, 20, 1, "21", "20");
 	}
 	
 	/*
@@ -170,7 +174,7 @@ public class SettingsReaderTest {
 	 ******************************************/
 	             
 	private void readAndAssertQuestionType(List<QuestionType> expected, int reAsks, String input, String...inputs) {
-		init(input, inputs);
+		init(4, input, inputs);
 		
 		final String REASK_TEXT = "Deine Antwort habe ich nicht verstanden"
 				+ ", da ich eine Zahl zwischen 1 und 3 benötige."

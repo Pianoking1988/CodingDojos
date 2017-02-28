@@ -17,6 +17,8 @@ import de.heinemann.dojo.quiz.models.QuestionType;
  */
 public class SettingsReader {
 
+	private final int MAX_NUMBER_OF_ANSWERS = 20;
+	
 	private int numberOfTotalQuestions;
 	private InputReader inputReader;
 
@@ -35,8 +37,10 @@ public class SettingsReader {
 	}
 	
 	public int readNumberOfAnswers() {
-		System.out.println("Das Quiz kennt insgesamt " + numberOfTotalQuestions + " Fragen. Wieviele Antwortmöglichkeiten soll es geben?");
-		int userInput = readInputFromUserUntilItIsValid(2, numberOfTotalQuestions);
+		int upperLimit = Math.min(numberOfTotalQuestions, MAX_NUMBER_OF_ANSWERS);
+		System.out.println("Das Quiz kennt insgesamt " + numberOfTotalQuestions + " Fragen. Wieviele Antwortmöglichkeiten soll es geben?"
+				+ " Wähle zwischen 2 und " + upperLimit + ".");
+		int userInput = readInputFromUserUntilItIsValid(2, upperLimit);
 		System.out.println("Danke für deine Antwort. Das Spiel wird dir für jede Frage " + userInput + " Antwortmöglichkeiten anzeigen.");
 		System.out.println("");
 
