@@ -2,7 +2,19 @@ package de.heinemann.dojo.quiz;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
+import de.heinemann.dojo.quiz.input.InputReader;
+import de.heinemann.dojo.quiz.model.Question;
+import de.heinemann.dojo.quiz.model.Statistic;
+
+/**
+ * Asks the given questions to the user, evaluates the input and prints statistic
+ * about the number of correct & incorrect answers.
+ */
 public class QuizMaster {
+	
+	private static final String SEPARATOR = StringUtils.repeat("*", 40);
 
 	private int numberOfQuestions;
 	private InputReader inputReader;
@@ -16,10 +28,11 @@ public class QuizMaster {
 
 	public void askQuestions(List<Question> questions) {
 		System.out.println("So lasset das Spiel beginnen ...");
+		System.out.println("");
 		for (int i = 0; i < Math.min(numberOfQuestions, questions.size()); i++) {
 			askQuestion(questions.get(i));
 		}
-		System.out.println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme");
+		System.out.println("Das Spiel ist nun zu Ende. Vielen Dank für deine Teilnahme.");
 	}
 
 	public boolean askQuestion(Question question) {
@@ -29,21 +42,24 @@ public class QuizMaster {
 
 		boolean isAnswerCorrect = question.isCorrectAnswerIndex(index); 
 		statistic.increment(isAnswerCorrect);
-		if (isAnswerCorrect) {		
-			System.out.println("Deine Antwort ist richtig.");
-		} else {
-			System.out.println("Deine Antwort ist falsch. Die richtige Antwort wäre " + question.getQuestionAnswerText() + " gewesen.");			
-		}
+		System.out.println("");
+		System.out.println(isAnswerCorrect
+				? "Deine Antwort ist richtig."
+				: "Deine Antwort ist falsch. Die richtige Antwort wäre " + question.getQuestionAnswerText() + " gewesen.");
 		System.out.println(statistic.getText());
+		System.out.println("");
 		
 		return isAnswerCorrect;
 	}
 
 	private void printQuestion(Question question) {
+		System.out.println(SEPARATOR);
+		System.out.println("");
 		System.out.println(question.getQuestionText());
 		for (int i = 0; i < question.getAllCountries().size(); i++) {
 			System.out.println(getCharacterFromIndex(i) + ") " + question.getAnswerTexts().get(i));
 		}
+		System.out.println("");
 	}
 
 	private int readIndexFromUserInputUntilItIsValid(Question question) {

@@ -1,23 +1,34 @@
 package de.heinemann.dojo.quiz;
 
+import static de.heinemann.dojo.quiz.model.QuestionType.ASK_FOR_CAPITAL;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import de.heinemann.dojo.quiz.model.Country;
+import de.heinemann.dojo.quiz.model.Question;
+import de.heinemann.dojo.quiz.model.QuestionType;
+import de.heinemann.dojo.quiz.random.Random;
 
 /**
  * Creates a shuffled list of questions based on the given shuffler.
  * The number of possible answers of each question can be specified
  * by the parameter {@link #numberOfPossibleAnswers}.
+ * The type of each question will be randomly picked from the given array
+ * of question types.
  */
 public class QuestionGenerator {
 	
 	private int numberOfPossibleAnswers;
-	private Shuffler shuffler;
+	private List<QuestionType> questionTypes;
+	private Random random;
 
 	private List<Question> questions = new ArrayList<>();
 
-	public QuestionGenerator(int numberOfPossibleAnswers, Shuffler shuffler) {
+	public QuestionGenerator(int numberOfPossibleAnswers, List<QuestionType> questionTypes, Random random) {
 		this.numberOfPossibleAnswers = numberOfPossibleAnswers;
-		this.shuffler = shuffler;
+		this.questionTypes = questionTypes;
+		this.random = random;
 	}
 	
 	/**
@@ -33,10 +44,11 @@ public class QuestionGenerator {
 		countries.stream().forEach(country -> {
 			Question question = new Question(country);
 			question.setAllCountries(buildAllCountriesList(countries, country));
+			question.setQuestionType(getRandomQuestionType());
 			questions.add(question);			
 		});
 		
-		shuffler.shuffle(questions);
+		random.shuffle(questions);
 		return questions;
 	}
 
@@ -51,10 +63,10 @@ public class QuestionGenerator {
 	private List<Country> buildAllCountriesList(List<Country> originalCountries, Country country) {
 		List<Country> countries = new ArrayList<>(originalCountries);
 		countries.remove(country);
-		shuffler.shuffle(countries);
+		random.shuffle(countries);
 		countries = getSubList(countries, 0, numberOfPossibleAnswers - 1);
 		countries.add(0, country);
-		shuffler.shuffle(countries);
+		random.shuffle(countries);
 		return countries;
 	}
 
@@ -71,4 +83,15 @@ public class QuestionGenerator {
 				? countries.subList(0, numberOfPossibleAnswers - 1)
 				: countries;
 	}
+
+	/**
+	 * Returns a random question type out of {@link #questionTypes}.
+	 */
+	private QuestionType getRandomQuestionType() {
+		int randomIndex = random.nextInt(questionTypes.size());
+		return randomIndex >= 0 && randomIndex < questionTypes.size()
+				? questionTypes.get(randomIndex)
+				: ASK_FOR_CAPITAL;
+	}
+
 }

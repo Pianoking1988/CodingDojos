@@ -1,4 +1,4 @@
-package de.heinemann.dojo.quiz;
+package de.heinemann.dojo.quiz.input;
 
 public interface InputReader {
 

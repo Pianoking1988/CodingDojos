@@ -1,0 +1,195 @@
+Philippinen#Manila
+São Tomé und Príncipe#São Tomé
+Tansania#Dodoma
+Polen#Warschau
+Saudi-Arabien#Riat
+Thailand#Bangkok
+Portugal#Lissabon
+Timor-Leste#Dili
+Ruanda#Kigali
+Schweiz#Bern
+Togo#Lomé
+Gambia#Sambul
+Rumänien#Bukarest
+Senegal#Dakar
+Tonga#
+Kosovo#Prischtina
+Serbien#Belgrad
+Trinidat und Tobago#Port au Spain
+Seychellen#Victoria
+Tschad#Tschadmero
+Sierra#Leone#Freetown
+Tschechische Republik#Prag
+Simbabwe#Harare
+Türkei#Ankara
+Singapur#Singapur#City
+Tunesien#Tunis
+Slowakai#Bratislava
+Turkmenistan#Aschkabat
+Slowenien#Lubbianer
+Tuvalu#Funafuti
+Somalia#Mogadischu
+Uganda#Kampala
+Spanien#Madrit
+Ukraine#Kiew
+Sri#Lanka#Kolombo
+Ungarn#Budapest
+St. Kitts#und#Nevis#Basseterre
+Uruguay#Montevideo
+St. Lucia#Castries
+Usbekistan#Taschkennt
+St. Vincent und die Grenadienen#Kingston
+Vanuateu#Port#Vila
+Sudan#Kartun
+Vatikanstadt#Vatikanstadt#City
+Südafrika#Pretoria
+Venezuela#Caracas
+Südkorea#Souhl
+Vereinigte Arabische#Emirate#Abudabi
+Russland#Mosskau
+Suriname#Paramaribo
+Vereinigte Staaten von Amerika#Waschington DC
+Salomonen#Honiara
+Swasiland#Maputo
+Vietnam#Hane
+Sambia#Lusaka
+Syrien#Damasskus
+Weißrussland#Minsk
+Brasilien#Brasilia
+Brunei#Banda#Serrebekiwa
+Griechenland#Athen
+Großbritanien#London
+Kenia#Nairobi
+Kirgisistan#Bischkek
+Kolumbien#Bogotá
+Komoren#Moroni
+Republik#Kongo#Brasavil
+Kroatien#Zagreb
+Kuwait#Kuwait Stadt
+Laos#Vientiane
+Lettland#Riga
+Libanon#Beirut
+Lybien#Tripolis
+Lichtenstein#Vaduz
+Luxemburg#Luxemburg
+Madagskar#Antananarivo
+Malaysia#Kuala#Lumpur
+Maledieven#Male
+Malta#Valletta
+Marokko#Rabat
+Mauritanien#Nauchatchot
+Mauritius#Port#Luis
+Mexiko#Mexiko#City
+Mikronesien#Palikia
+Monacco#Monacco
+Mongolei#Ulam Bator
+Mozambik#Maputo Stadt
+Myanmar#Neypidor
+Nauru#Melekeok
+Nepal#Katmandu
+Nicaragua#Managua
+Niederlande#Amsterdam
+Nigeria#Abuja
+Nordkorea#Pjönjang
+Österreich#Wien
+Oman#Maskatt
+Palau#
+Panama#PanamaStadt
+Paraguay#Asunsion
+Peru#Lima
+Samoa#Apia
+San Marino#Stadt San Marino
+Tadschikistan#Duschanbe
+Taiwan#Taipe
+Zentralafrikanische Republik#Monghien
+Südsudan#Juba
+Zypern#Nikosia
+Ägypten#Kairo
+Bulgarien#Sofia
+Guatemala#Guatemala Stadt
+Kiribati#
+Demokratische Republik Kongo#Kinschasa
+Kuba#Havanna
+Lesotho#Maseru
+Liberia#Manrovia
+Litauen#Vilnius
+Malawi#Litongwe
+Mali#Bamarko
+Marschallinseln
+Mazedonien#Skopie
+Moldawien#Kischinau
+Montenegro#Potgorica
+Namibia#Winthook
+Neuseeland#Wellington
+Niger#Niamee
+Norwegen#Oslo
+Pakistan#Islamabat
+PapuaNeuguinea#Pt. Moresby
+Äquatorialguinea#Malabo
+Burkina Faso#Uagaduku
+Guinea#Konnakri
+Äthiopien#Adis Abeba
+Burundi#Boschunbora
+Guinea-Bissau#Bissau
+Afghanistan#Kabul
+Chile#Santiago de Chile
+Gayana#Georgtown
+Albanien#Tirana
+China#Peking
+Haiti#Port-au-Prince
+Algerien#Algier
+Costa Rica#San José
+Honduras#Tegucigalpa
+Andorra#Andorra la Vella
+Dänamark#Coppenhagen
+Indien#New Dheli
+Angola#Luanda
+Deutschland#Berlin
+Indonesien#Yarkata
+Antiguant und Barbuda#Saint John's
+Dominika#Roseau
+Irak#Bakdad
+Argentinien#Bienos Aires
+Dominikanishe Republik Santo#Domingo
+Iran#Teheran
+Armenien#Jerrewan
+Dschibuti#Dschibuti
+Irland#Dublin
+Aserbaidschan#Baku
+Ecuador#Quito
+Island#Reykjavik
+Australien#Canberra
+El#Salvador#San#Salvador
+Israel#Jerusalem
+Bahamas#Nassau
+Elfenbeinküste#Yamuschku
+Italien#Rom
+Bahrain#Manamar
+Eritrea#Assmara
+Jamaika#Kingston
+Bangladesch#Dhakar
+Estland#Tallin
+Japan#Tokio
+Barbados#Bridgetown
+Fidschi#Suva
+Jemen#Sanaa
+Belgien#Brüssel
+Finnland#Helsinki
+Jordanien#Amman
+Belize#Belmopan
+Frankreich#Paris
+Kambodscha#Phriom#Penh
+Benin#Porto#Novo
+Gabun#Lebrevil
+Kamerun#Jaunde
+Buthan#Tempu
+Gambia#Sambul
+Kanada#Ottawa
+Bolivien#Súcre
+Georgien#Tifliss
+Bosien und Herzegowina#Sarajewo
+Ghana#Akra
+Kasachstan#Astana
+Botswana#Gaboroné
+Grenada#Saint George's
+Katar#Dohar

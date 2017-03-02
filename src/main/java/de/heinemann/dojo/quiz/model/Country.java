@@ -1,4 +1,4 @@
-package de.heinemann.dojo.quiz;
+package de.heinemann.dojo.quiz.model;
 
 public class Country {
 
@@ -16,6 +16,15 @@ public class Country {
 
 	public String getCapital() {
 		return capital;
+	}
+
+	@Override
+	public String toString() {
+		return new StringBuilder("Country [")
+				.append("name=").append(name)
+				.append(", capital=").append(capital)
+				.append("]")
+				.toString();
 	}
 
 }
